@@ -1,0 +1,11 @@
+POST http://localhost:8000/api/user/login
+Content-Type: application/json
+X-CSRFToken: liqHezRwcgtf97GMHLOHddMt95ooYHKGARI1dx3N5Ag696gQB4ZoRKcH2DDLngJN
+Cookie: csrftoken=liqHezRwcgtf97GMHLOHddMt95ooYHKGARI1dx3N5Ag696gQB4ZoRKcH2DDLngJN
+
+{
+  "mobile": "15596207601",
+  "password": "123456"
+}
+
+###
