@@ -2,7 +2,9 @@ import os
 import datetime
 from facePhoto.settings import PHOTO_DIR_ROOT
 from facePhoto.utils.FPDecorator import request_decorator, login_decorator, dump_form_data
-from facePhoto.models import Photo
+from facePhoto.models import Photo, FaceAlbumPhoto
+from facePhoto.utils.FPExceptions import FormException
+
 
 
 @request_decorator
@@ -38,3 +40,47 @@ def fetch_user_photo(request):
     uid = request.session.get('user').get('id')
     photos = list(Photo.objects.filter(user_id=uid).values())
     return photos
+
+
+@request_decorator
+@login_decorator
+def fetch_by_face_album(request, face_album_id):
+    face_album_photos = FaceAlbumPhoto.objects.filter(face_album_id=face_album_id)
+    photo_ids = [face_album_photo.photo_id for face_album_photo in face_album_photos]
+    photos = list(Photo.objects.filter(id__in=photo_ids).values())
+    return photos
+
+
+@request_decorator
+@login_decorator
+@dump_form_data
+def delete(request, form_data):
+    user = request.session.get('user')
+    photo_id = int(form_data)
+    if not photo_id:
+        raise FormException('照片id不合法')
+    try:
+        photo = Photo.objects.get(id=photo_id)
+        if photo.user_id != user.get('id'):
+            raise FormException('无权操作')
+        photo.delete()
+        return "删除成功"
+    except Photo.DoesNotExist:
+        raise FormException('照片不存在')
+
+
+@request_decorator
+@login_decorator
+@dump_form_data
+def modify(request, form_data):
+    photo_id = form_data.get("id")
+    new_name = form_data.get("name")
+    user_id = request.session.get('user').get('id')
+    try:
+        photo = Photo.objects.get(id=photo_id)
+        if photo.user_id != user_id:
+            raise FormException('无权限操作')
+        photo.name = new_name
+        photo.save()
+    except Photo.DoesNotExist:
+        raise FormException('照片不存在')

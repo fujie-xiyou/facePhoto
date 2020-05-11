@@ -125,3 +125,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 PHOTO_DIR_ROOT = BASE_DIR + "/facePhoto/static/facePhoto/"
+FACENET_MODEL_PATH = "~/Downloads/20180402-114759"

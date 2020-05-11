@@ -30,7 +30,7 @@ def login_decorator(func):
 def dump_form_data(func):
     def wrapper(request, *args, **kw):
         try:
-            form_data = json.loads(request.body)
+            form_data = json.loads(request.body.decode('utf-8'))
         except json.JSONDecodeError:
             raise FormException('表单数据异常')
         return func(request, form_data, *args, **kw)

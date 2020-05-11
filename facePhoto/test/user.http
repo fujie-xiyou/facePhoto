@@ -9,3 +9,22 @@ Cookie: csrftoken=liqHezRwcgtf97GMHLOHddMt95ooYHKGARI1dx3N5Ag696gQB4ZoRKcH2DDLng
 }
 
 ###
+
+
+GET /api/face_album/fetch HTTP/1.1
+Host: localhost:8001
+Connection: keep-alive
+Pragma: no-cache
+Cache-Control: no-cache
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36
+DNT: 1
+Accept: */*
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Referer: http://localhost:8001/albums/albumphotos/39
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8
+Cookie: _ga=GA1.1.1420581976.1588057219; sessionid=a09rvuv26ca7lwrab41c2q4pmcmvemha
+
+###
