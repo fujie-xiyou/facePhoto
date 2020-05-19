@@ -28,3 +28,19 @@ Accept-Language: zh-CN,zh;q=0.9,zh-TW;q=0.8
 Cookie: _ga=GA1.1.1420581976.1588057219; sessionid=a09rvuv26ca7lwrab41c2q4pmcmvemha
 
 ###
+
+POST http://localhost:8000/api/photo/style
+Content-Type: application/json
+
+{
+  "id": 30,
+  "style_type": "starry_night"
+}
+
+###
+
+
+GET http://localhost:8000/api/photo/similarity
+Accept: application/json
+
+###

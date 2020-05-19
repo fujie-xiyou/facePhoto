@@ -6,7 +6,7 @@ class User(models.Model):
     class Meta:
         db_table = 'user'
 
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=50)
     mobile = models.CharField(max_length=11)
     password = models.CharField(max_length=35)
@@ -16,7 +16,7 @@ class Album(models.Model):
     class Meta:
         db_table = 'album'
 
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, db_column='uid')
@@ -27,7 +27,7 @@ class Photo(models.Model):
     class Meta:
         db_table = 'photo'
 
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     user = models.ForeignKey(to=User, on_delete=models.CASCADE, db_column='uid')
     album = models.ForeignKey(to=Album, on_delete=models.CASCADE, db_column='aid')
     name = models.CharField(max_length=64)
@@ -69,3 +69,36 @@ class FaceAlbumPhoto(models.Model):
 
     photo = models.ForeignKey(to=Photo, on_delete=models.CASCADE, db_column='pid')
     face_album = models.ForeignKey(to=FaceAlbum, on_delete=models.CASCADE, db_column='face_album_id')
+
+
+class PhotoHash(models.Model):
+    class Meta:
+        db_table = 'photo_hash'
+    id = models.AutoField(primary_key=True)
+    photo = models.OneToOneField(to=Photo, on_delete=models.CASCADE, db_column='pid')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, db_column='uid')
+    hash = models.BigIntegerField()
+
+
+class SimilarityPhotoAlbum(models.Model):
+    class Meta:
+        db_table = 'similarity_photo_album'
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, db_column='uid')
+
+
+class SimilarityPhoto(models.Model):
+    class Meta:
+        db_table = 'similarity_photo'
+    id = models.AutoField(primary_key=True)
+    photo = models.OneToOneField(to=Photo, on_delete=models.CASCADE, db_column='pid')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, db_column='uid')
+    sp_album = models.ForeignKey(to=SimilarityPhotoAlbum, on_delete=models.CASCADE, db_column='sp_album_id')
+
+
+class BlurredPhoto(models.Model):
+    class Meta:
+        db_table = 'blurred_photo'
+    id = models.AutoField(primary_key=True)
+    photo = models.OneToOneField(to=Photo, on_delete=models.CASCADE, db_column='pid')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, db_column='uid')

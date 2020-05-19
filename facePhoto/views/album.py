@@ -37,5 +37,30 @@ def fetch_user_albums(request):
 @dump_form_data
 @login_decorator
 def modify(request, form_data):
-    # 待开发
-    pass
+    album_id = form_data.get('album_id')
+    user_id = request.session.get('user').get('id')
+    try:
+        album = Album.objects.get(id=album_id, user_id=user_id)
+    except Album.DoesNotExist:
+        raise FormException('相册不存在')
+    name = form_data.get('name')
+    if not name:
+        raise FormException('名称不能为空')
+    album.name = name
+    album.description = form_data.get('description')
+    album.save()
+    return "修改成功"
+
+
+@request_decorator
+@dump_form_data
+@login_decorator
+def delete(request, form_data):
+    album_id = form_data.get('album_id')
+    user_id = request.session.get('user').get('id')
+    try:
+        album = Album.objects.get(id=album_id, user_id=user_id)
+    except Album.DoesNotExist:
+        raise FormException('相册不存在')
+    album.delete()
+    return "删除成功"

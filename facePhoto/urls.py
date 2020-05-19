@@ -9,22 +9,31 @@ photo_patterns = [
     path('fetch_user_photo', photo.fetch_user_photo),
     path('fetch_by_face_album/<int:face_album_id>', photo.fetch_by_face_album),
     path('delete', photo.delete),
-    path('modify', photo.modify)
+    path('modify', photo.modify),
+    path('style', photo.style),
+    path('similarity', photo.similarity),
+    path('similarity/delete', photo.similarity_delete),
+    path('blurry', photo.blurry),
+    path('blurry/unmark', photo.unmark_blurry)
 ]
 
 album_patterns = [
     path('create', album.create),
-    path('fetchUserAlbums', album.fetch_user_albums)
+    path('fetchUserAlbums', album.fetch_user_albums),
+    path('delete', album.delete),
+    path('modify', album.modify),
 ]
 
 user_patterns = [
     path('login', user.login),
     path('register', user.register),
-    path('currentUser', user.currentUser)
+    path('currentUser', user.currentUser),
+    path('logout', user.logout)
 ]
 
 face_album_patterns = [
-    path('fetch', face_album.fetch)
+    path('fetch', face_album.fetch),
+    path('modify', face_album.modify)
 ]
 
 

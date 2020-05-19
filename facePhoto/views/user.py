@@ -38,6 +38,8 @@ def register(request, form_data):
     username = form_data.get('username')
     if not username or len(username) < 3 or len(username) > 10:
         raise FormException('用户名不合法')
+    if User.objects.filter(username=username).count() > 0:
+        raise FormException('用户名已存在')
     password = form_data.get('password')
     if not password or len(password) < 6 or len(password) > 20:
         raise FormException('密码不合法')
@@ -45,6 +47,8 @@ def register(request, form_data):
 
     if not mobile or not re.match(r'^[1]([3-9])[0-9]{9}$', mobile):
         raise FormException('手机号不合法')
+    if User.objects.filter(mobile=mobile).count() > 0:
+        raise FormException('手机号已存在')
     user = User(username=username, mobile=mobile, password=password)
     try:
         user.save()
@@ -59,3 +63,9 @@ def currentUser(request):
     user = request.session.get('user')
     return user
 
+
+@request_decorator
+@login_decorator
+def logout(request):
+    request.session.clear()
+    return "退出成功"
