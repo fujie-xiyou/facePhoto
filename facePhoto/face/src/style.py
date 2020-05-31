@@ -50,6 +50,7 @@ def style_transfer(src_image_path, dst_image_path, style_type, width=960, jpg_qu
     cv2.imwrite(dst_image_path, output, [int(cv2.IMWRITE_JPEG_QUALITY), jpg_quality])
 
 
+# 照片转素描
 def rgb_to_sketch(src_image_path, dst_image_path):
     img_gray = cv2.imread(src_image_path, cv2.IMREAD_GRAYSCALE)
     img_gray_inv = 255 - img_gray

@@ -1,11 +1,15 @@
 import os
 import datetime
 import logging
+import json
+
+from django.forms.models import model_to_dict
 
 from facePhoto.settings import PHOTO_DIR_ROOT
 from facePhoto.utils.FPDecorator import request_decorator, login_decorator, dump_form_data
 from facePhoto.models import Photo, FaceAlbumPhoto, BlurredPhoto, Album, SimilarityPhotoAlbum, SimilarityPhoto
 from facePhoto.utils.FPExceptions import FormException
+from facePhoto.utils.redis import get_redis_con
 from facePhoto.face.src.style import style_types, style_transfer, rgb_to_sketch
 from facePhoto.face.src.blurry_photo import is_blurred
 
@@ -32,6 +36,10 @@ def upload_photo(request):
         raise FormException('相册不存在')
     photo = Photo(name=myFile.name, path=path, user_id=user_id, album_id=album_id)
     photo.save()
+    redis_con = get_redis_con()
+    photo_json = json.dumps(photo.__dict__, default=str)
+    redis_con.xadd(name="photos", fields={"photo_json": photo_json})
+    redis_con.close()
     if is_blurred(image_path):
         BlurredPhoto(photo_id=photo.id, user_id=user_id).save()
     return "上传结束"
