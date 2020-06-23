@@ -3,8 +3,8 @@ import threading
 
 django.setup()
 
-from facePhoto.face.src.scan_face import scan_face
-from facePhoto.face.src.hash import photo_hash
+from facePhoto.face.scan_face import scan_face
+from facePhoto.face.hash import photo_hash
 
 
 class FaceThread(threading.Thread):

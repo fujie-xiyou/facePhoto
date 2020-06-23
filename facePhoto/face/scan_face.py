@@ -4,7 +4,7 @@ import time
 import numpy as np
 from facePhoto.models import PhotoEmbedding, FaceAlbum, FaceAlbumPhoto, FaceAlbumNameNumber
 from facePhoto.settings import PHOTO_DIR_ROOT, FACENET_MODEL_PATH
-from face_recognition import FacenetEmbedding, FaceDetection, get_dist
+from facePhoto.face.face_recognition import FacenetEmbedding, FaceDetection, get_dist
 from facePhoto.utils.redis import get_redis_con
 
 facenet_embedding = FacenetEmbedding(FACENET_MODEL_PATH)

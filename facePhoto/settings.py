@@ -127,4 +127,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 PHOTO_DIR_ROOT = BASE_DIR + "/facePhoto/static/facePhoto/"
 FACENET_MODEL_PATH = "~/Downloads/20180402-114759"
+style_models_path = "/Users/fujie/PycharmProjects/相册系统/facePhoto/face/fast-neural-style/models/models"
 redis_pool = redis.ConnectionPool(host='localhost')

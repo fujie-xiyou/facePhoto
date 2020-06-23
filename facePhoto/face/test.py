@@ -21,11 +21,11 @@
 
 def style():
     import glob
-    from style import style_transfer
-    models = glob.glob('../fast-neural-style/models/*/*.t7')
+    from facePhoto.face.style import style_transfer
+    models = glob.glob('./fast-neural-style/models/*/*.t7')
     pathOut = '/Users/fujie/Downloads/style.jpg'
     pathIn = '/Users/fujie/Downloads/IMG_20190505_185934.jpg'
-    style_transfer(pathIn, pathOut, models[9], width=960)
+    style_transfer(pathIn, pathOut, models[1], width=960)
 
 
 if __name__ == '__main__':

@@ -3,15 +3,13 @@ import datetime
 import logging
 import json
 
-from django.forms.models import model_to_dict
-
 from facePhoto.settings import PHOTO_DIR_ROOT
 from facePhoto.utils.FPDecorator import request_decorator, login_decorator, dump_form_data
 from facePhoto.models import Photo, FaceAlbumPhoto, BlurredPhoto, Album, SimilarityPhotoAlbum, SimilarityPhoto
 from facePhoto.utils.FPExceptions import FormException
 from facePhoto.utils.redis import get_redis_con
-from facePhoto.face.src.style import style_types, style_transfer, rgb_to_sketch
-from facePhoto.face.src.blurry_photo import is_blurred
+from facePhoto.face.style import style_types, style_transfer, rgb_to_sketch
+from facePhoto.face.blurry_photo import is_blurred
 
 
 @request_decorator

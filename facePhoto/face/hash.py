@@ -3,12 +3,12 @@ import json
 import django
 import time
 from easydict import EasyDict
-from facePhoto.face.src.similarity import hash_String, Difference
+from facePhoto.face.similarity import hash_String, Difference
 from facePhoto.utils.redis import get_redis_con
 
 django.setup()
 
-from facePhoto.models import Photo, PhotoHash, SimilarityPhotoAlbum, SimilarityPhoto
+from facePhoto.models import PhotoHash, SimilarityPhotoAlbum, SimilarityPhoto
 from facePhoto.settings import PHOTO_DIR_ROOT
 
 

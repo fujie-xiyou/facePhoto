@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
 
 # 载入所需库
+import os
 import cv2
 import time
+from facePhoto.settings import style_models_path as models_path
+
 style_type_dict = {
-    "candy": '/Users/fujie/PycharmProjects/相册系统/facePhoto/face/fast-neural-style/models/instance_norm/candy.t7',
-    "la_muse": '/Users/fujie/PycharmProjects/相册系统/facePhoto/face/fast-neural-style/models/eccv16/la_muse.t7',
-    "starry_night": '/Users/fujie/PycharmProjects/相册系统/facePhoto/face/fast-neural-style/models/eccv16/starry_night.t7',
-    "the_scream": '/Users/fujie/PycharmProjects/相册系统/facePhoto/face/fast-neural-style/models/instance_norm/the_scream.t7'
+    "candy": os.path.join(models_path, 'instance_norm/candy.t7'),
+    "la_muse": os.path.join(models_path, 'eccv16/la_muse.t7'),
+    "starry_night": os.path.join(models_path, 'eccv16/starry_night.t7'),
+    "the_scream": os.path.join(models_path, 'instance_norm/the_scream.t7')
 }
 
 

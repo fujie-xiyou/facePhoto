@@ -1,10 +1,10 @@
 import tensorflow as tf
-import facenet
+from facePhoto.face.facenet.src import facenet
 import cv2
 import numpy as np
 from scipy import misc
 
-from align import detect_face
+from facePhoto.face.facenet.src.align import detect_face
 
 
 def get_dist(emb1, emb2):
